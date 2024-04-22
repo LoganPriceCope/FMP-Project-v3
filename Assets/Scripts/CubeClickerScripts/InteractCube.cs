@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class InteractCube : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class InteractCube : MonoBehaviour
 
     public ParticleSystem particleEffect;
     public float particleDuration = 0.2f;
+    public AudioClip clickSoundEffect;
+    public AudioSource source;
 
     public float scaleFactor = 1.2f;
     public float scaleDuration = 0.1f;
@@ -26,6 +29,7 @@ public class InteractCube : MonoBehaviour
         if (isRunning == false)
         {
             StartCoroutine(ScaleObject());
+            source.PlayOneShot(clickSoundEffect);
         }
     }
 
