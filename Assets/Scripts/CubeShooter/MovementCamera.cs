@@ -14,8 +14,9 @@ public class MovementCamera : MonoBehaviour
  
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
- 
- 
+
+    [SerializeField] GunData gunData;
+
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
  
@@ -32,7 +33,6 @@ public class MovementCamera : MonoBehaviour
  
     void Update()
     {
- 
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -42,10 +42,11 @@ public class MovementCamera : MonoBehaviour
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
+
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
- 
+
         #endregion
- 
+
         #region Handles Jumping
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
