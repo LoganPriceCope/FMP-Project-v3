@@ -23,15 +23,15 @@ public class Gun : MonoBehaviour
 
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
-    public float bulletSpeed = 1000f;
+    public float bulletSpeed = 100f;
 
     float timeSinceLastShot;
 
     Animator anim;
     private void Start()
     {
-        gunData.currentAmmo = 46;
-        gunData.magSize = 46;
+        gunData.currentAmmo = 82;
+        gunData.magSize = 82;
         PlayerShoot.shootInput += Shoot;
         PlayerShoot.reloadInput += StartReload;
 

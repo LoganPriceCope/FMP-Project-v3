@@ -6,9 +6,11 @@ using TMPro;
 public class EnemyScript : MonoBehaviour
 {
 
-    public GameObject Player;
+    private GameObject Player;
     public GameObject Enemy;
     public float speed = 0.005f;
+
+
 
     public TextMeshProUGUI cooldownText;
 
@@ -19,6 +21,11 @@ public class EnemyScript : MonoBehaviour
     public float damageCooldown = 3f;
 
     private bool canTrigger = true;
+
+    void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update()
     {
