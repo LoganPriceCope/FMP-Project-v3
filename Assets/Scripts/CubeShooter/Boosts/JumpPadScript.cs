@@ -9,7 +9,7 @@ public class JumpPadScript : MonoBehaviour
     public GameObject jumpPad;
 
     public float boostAmount;
-    public float damageCooldown = 3f;
+    public float damageCooldown = 1.5f;
 
     public bool canTrigger = true;
 
@@ -21,24 +21,34 @@ public class JumpPadScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
-        if (canTrigger)
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                print("WORKS");
-                StartCoroutine(JumpPadCooldown());
-            }
-        }
+        Player.GetComponent<MovementCamera>().jumpPower = 15;
+    }
+    public void OnTriggerExit(Collider collision)
+    {
+        Player.GetComponent<MovementCamera>().jumpPower = 8;
     }
 
-    public IEnumerator JumpPadCooldown()
-    {
-        print("JumpPad activated");
-        Player.GetComponent<MovementCamera>().jumpPower = 12f;
-        canTrigger = false;
-        yield return new WaitForSeconds(damageCooldown);
-        canTrigger = true;
-        Player.GetComponent<MovementCamera>().jumpPower = 7f;
-        print("JumpPad Stop");
-    }
+    /* public void OnTriggerEnter(Collider collision)
+     {
+         if (canTrigger)
+         {
+             if (collision.gameObject.tag == "Player")
+             {
+                 print("WORKS");
+                 StartCoroutine(JumpPadCooldown());
+             }
+         }
+     }
+
+     public IEnumerator JumpPadCooldown()
+     {
+         print("JumpPad activated");
+         Player.GetComponent<MovementCamera>().jumpPower = 15f;
+        // canTrigger = false;
+         yield return new WaitForSeconds(damageCooldown);
+         //canTrigger = true;
+         Player.GetComponent<MovementCamera>().jumpPower = 4f;
+         print("JumpPad Stop");
+     }
+    */
 }
