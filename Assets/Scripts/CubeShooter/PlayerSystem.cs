@@ -7,8 +7,11 @@ using UnityEngine.SceneManagement;
 public class PlayerSystem : MonoBehaviour
 {
     public Text healthUI;
-    public float totalHP = 100f;
-    public float currentHP;
+    private float totalHP = GameManagerScript.instance.healthUpgradeMultiplier;
+    private float currentHP;
+
+    public float coins = 0;
+    public Text coinText;
 
     public GameObject Player;
     public GameObject Enemy;
@@ -18,14 +21,21 @@ public class PlayerSystem : MonoBehaviour
     public float minSpawnDistance = 50f;
     public int maxEnemies = 1;
     public int currentEnemies = 1;
-
-    void Start()
+    void Awake()
     {
         currentHP = totalHP;
         SpawnEnemies();
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            print("Cointouched");
+            coins++;
+            Destroy(other.gameObject);
+        }
+    }
 
     void Update()
     {
@@ -36,13 +46,14 @@ public class PlayerSystem : MonoBehaviour
         }
         else
         {
-            healthUI.text = currentHP + "HP";
+            healthUI.text = "HEALTH: " + currentHP;
         }  
 
         if (currentEnemies < maxEnemies)
         {
             SpawnEnemiesTwo();
         }
+        coinText.text = "COINS: " + coins;
     }
 
     void Respawn()

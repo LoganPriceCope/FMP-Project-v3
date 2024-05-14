@@ -41,8 +41,16 @@ public class EnemyScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                Player.GetComponent<PlayerSystem>().TakeDamage(damage);
-                StartCoroutine(StartCoolDown());
+                if (GameManagerScript.instance.hdtUpgradeMultiplier == false)
+                {
+                    Player.GetComponent<PlayerSystem>().TakeDamage(damage);
+                    StartCoroutine(StartCoolDown());
+                }
+                else
+                {
+                    Player.GetComponent<PlayerSystem>().TakeDamage(damage/2);
+                    StartCoroutine(StartCoolDown());
+                }
             }
         } 
     }

@@ -6,6 +6,21 @@ using UnityEngine.UI;
 public class CurrencySystem : MonoBehaviour
 {
 
+    public Text reloadUpgradeCostText;
+    public Text reloadUpgradeMultiplierText;
+
+    public Text damageUpgradeCostText;
+    public Text damageUpgradeMultiplierText;
+
+    public Text movementSpeedUpgradeCostText;
+    public Text movementSpeedUpgradeMultiplierText;
+
+    public Text healthUpgradeCostText;
+    public Text healthUpgradeMultiplierText;
+
+    public Text hdtUpgradeCostText;
+    public Text hdtUpgradeMultiplierText;
+
     // Upgrades Tapper
     public float tapperUpgradePurchases = 1f;
     public float tapperUpgradeMultiplier = 1f;
@@ -52,12 +67,125 @@ public class CurrencySystem : MonoBehaviour
     public Text coinCount;
     public Text coinsPerClick;
 
+    GameManagerScript gm;
+
+    private void Start()
+    {
+        gm = GameManagerScript.instance;
+        
+    }
+
     private void Update()
     {
 
         coinCount.text = coinCounter+"";
         multiplier = 1 + (helpingHandUpgradeMultiplier + superTapperUpgradeMultiplier + tappingFactoryUpgradeMultiplier + tappingUniverseUpgradeMultiplier) * tapperUpgradeMultiplier;
         coinsPerClick.text = multiplier + "c/click";
+
+        // Reload upgrade costs
+        gm.reloadUpgradeCostBoost = gm.reloadUpgradePurchases * 10;
+        if (gm.reloadUpgradePurchases > 1)
+        {
+            gm.reloadUpgradeCost = 10f * gm.reloadUpgradePurchases * gm.reloadUpgradePurchases * gm.reloadUpgradePurchases * gm.reloadUpgradePurchases;
+        }
+        else
+        {
+            gm.reloadUpgradeCost = 10f * gm.reloadUpgradePurchases;
+        }
+        if (gm.reloadUpgradePurchases < 5)
+        {
+            reloadUpgradeCostText.text = "[" + gm.reloadUpgradeCost + "c]";
+            reloadUpgradeMultiplierText.text = gm.reloadUpgradeMultiplier + "/S >" + (gm.reloadUpgradeMultiplier - 0.5f) + "/S";
+        }
+        else
+        {
+            reloadUpgradeCostText.text = "[MAX]";
+            reloadUpgradeMultiplierText.text = gm.reloadUpgradeMultiplier + "/S";
+        }
+
+        // Damage upgrade costs
+        gm.damageUpgradeCostBoost = gm.damageUpgradePurchases * 10;
+        if (gm.damageUpgradePurchases > 1)
+        {
+            gm.damageUpgradeCost = 10f * gm.damageUpgradePurchases * gm.damageUpgradePurchases * gm.damageUpgradePurchases * gm.damageUpgradePurchases;
+        }
+        else
+        {
+            gm.damageUpgradeCost = 10f * gm.damageUpgradePurchases;
+        }
+        if (gm.damageUpgradePurchases < 4)
+        {
+            damageUpgradeCostText.text = "[" + gm.damageUpgradeCost + "c]";
+            damageUpgradeMultiplierText.text = gm.damageUpgradeMultiplier + ">" + (gm.damageUpgradeMultiplier + 25f);
+        }
+        else
+        {
+            damageUpgradeCostText.text = "[MAX]";
+            damageUpgradeMultiplierText.text = gm.damageUpgradeMultiplier + "";
+        }
+
+        // Movement Speed upgrade costs
+        gm.movementSpeedUpgradeCostBoost = gm.movementSpeedUpgradePurchases * 10;
+        if (gm.movementSpeedUpgradePurchases > 1)
+        {
+            gm.movementSpeedUpgradeCost = 10f * gm.movementSpeedUpgradePurchases * gm.movementSpeedUpgradePurchases * gm.movementSpeedUpgradePurchases * gm.movementSpeedUpgradePurchases;
+        }
+        else
+        {
+            gm.movementSpeedUpgradeCost = 10f * gm.movementSpeedUpgradePurchases;
+        }
+        if (gm.movementSpeedUpgradePurchases < 4)
+        {
+            movementSpeedUpgradeCostText.text = "[" + gm.movementSpeedUpgradeCost + "c]";
+            movementSpeedUpgradeMultiplierText.text = gm.movementSpeedUpgradeMultiplier + ">" + (gm.movementSpeedUpgradeMultiplier + 5f) + "";
+        }
+        else
+        {
+            movementSpeedUpgradeCostText.text = "[MAX]";
+            movementSpeedUpgradeMultiplierText.text = gm.movementSpeedUpgradeMultiplier + "";
+        }
+
+        // Health upgrade costs
+        gm.healthUpgradeCostBoost = gm.healthUpgradePurchases * 10;
+        if (gm.healthUpgradePurchases > 1)
+        {
+            gm.healthUpgradeCost = 10f * gm.healthUpgradePurchases * gm.healthUpgradePurchases * gm.healthUpgradePurchases * gm.healthUpgradePurchases;
+        }
+        else
+        {
+            gm.healthUpgradeCost = 10f * gm.healthUpgradePurchases;
+        }
+        if (gm.healthUpgradePurchases < 4)
+        {
+            healthUpgradeCostText.text = "[" + gm.healthUpgradeCost + "c]";
+            healthUpgradeMultiplierText.text = gm.healthUpgradeMultiplier + ">" + (gm.healthUpgradeMultiplier + 5f) + "";
+        }
+        else
+        {
+            healthUpgradeCostText.text = "[MAX]";
+            healthUpgradeMultiplierText.text = gm.healthUpgradeMultiplier + "";
+        }
+
+        // Half damage taken upgrade costs
+        gm.hdtUpgradeCostBoost = gm.hdtUpgradePurchases * 10;
+        if (gm.hdtUpgradePurchases > 1)
+        {
+            gm.hdtUpgradeCost = 10f * gm.hdtUpgradePurchases * gm.hdtUpgradePurchases * gm.hdtUpgradePurchases * gm.hdtUpgradePurchases;
+        }
+        else
+        {
+            gm.hdtUpgradeCost = 10f * gm.hdtUpgradePurchases;
+        }
+        if (gm.hdtUpgradePurchases < 2)
+        {
+            hdtUpgradeCostText.text = "[" + gm.hdtUpgradeCost + "c]";
+            hdtUpgradeMultiplierText.text = gm.hdtUpgradeMultiplier + "";
+        }
+        else
+        {
+            hdtUpgradeCostText.text = "[MAX]";
+            hdtUpgradeMultiplierText.text = gm.hdtUpgradeMultiplier + "";
+        }
 
         // Tapper upgrade costs
         tapperUpgradeCostBoost = tapperUpgradePurchases * 10;
@@ -125,6 +253,8 @@ public class CurrencySystem : MonoBehaviour
         tappingUniverseUpgradeMultiplierText.text = "+" + tappingUniverseUpgradeMultiplier;
     }
 
+
+    // || CUBE CLICKER UPGADES ||
     public void tapperUpgradeHandler()
     {
         if (coinCounter >= tapperUpgradeCost)
@@ -180,5 +310,55 @@ public class CurrencySystem : MonoBehaviour
     public void AddCube()
     {
         coinCounter = coinCounter + multiplier;
+    }
+
+    // || FIRST PERSON SHOOTER UPGRADES ||
+    public void ReloadSpeedUpgradeHandler()
+    {
+        if (coinCounter >= gm.reloadUpgradeCost && gm.reloadUpgradeMultiplier > 4)
+        {
+            coinCounter = coinCounter - gm.reloadUpgradeCost;
+            gm.reloadUpgradePurchases = gm.reloadUpgradePurchases + 1;
+            gm.reloadUpgradeMultiplier = gm.reloadUpgradeMultiplier - 0.5f;
+        }
+    }
+
+    public void DamageUpgradeHandler()
+    {
+        if (coinCounter >= gm.damageUpgradeCost && gm.damageUpgradeMultiplier < 100)
+        {
+            coinCounter = coinCounter - gm.damageUpgradeCost;
+            gm.damageUpgradePurchases = gm.damageUpgradePurchases + 1;
+            gm.damageUpgradeMultiplier = gm.damageUpgradeMultiplier + 25f;
+        }
+    }
+
+    public void MovementSpeedUpgradeHandler()
+    {
+        if (coinCounter >= gm.movementSpeedUpgradeCost && gm.movementSpeedUpgradeMultiplier < 25)
+        {
+            coinCounter = coinCounter - gm.movementSpeedUpgradeCost;
+            gm.movementSpeedUpgradePurchases = gm.movementSpeedUpgradePurchases + 1;
+            gm.movementSpeedUpgradeMultiplier = gm.movementSpeedUpgradeMultiplier + 5f;
+        }
+    }
+    public void HealthUpgradeHandler()
+    {
+        if (coinCounter >= gm.healthUpgradeCost && gm.healthUpgradeMultiplier < 25)
+        {
+            coinCounter = coinCounter - gm.healthUpgradeCost;
+            gm.healthUpgradePurchases = gm.healthUpgradePurchases + 1;
+            gm.healthUpgradeMultiplier = gm.healthUpgradeMultiplier + 5f;
+        }
+    }
+
+    public void HdtUpgradeHandler()
+    {
+        if (coinCounter >= gm.hdtUpgradeCost && gm.hdtUpgradeMultiplier == false)
+        {
+            coinCounter = coinCounter - gm.hdtUpgradeCost;
+            gm.hdtUpgradePurchases = gm.hdtUpgradePurchases + 1;
+            gm.hdtUpgradeMultiplier = true;
+        }
     }
 }

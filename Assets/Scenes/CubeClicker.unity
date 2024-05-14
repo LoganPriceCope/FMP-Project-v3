@@ -1541,7 +1541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.1657, y: -136}
+  m_AnchoredPosition: {x: 3.5725, y: -10}
   m_SizeDelta: {x: 542.7756, y: 54.2909}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266110327
@@ -1565,9 +1565,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 18473fbabbcacc941aa3fae77afe267b, type: 3}
     m_FontSize: 13
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 165
@@ -1694,11 +1694,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3884dd9aff2cc6243b587ef6f40c1b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reload: 0
   playerSpeed: 0
-  gunDamage: 0
   playerHealth: 0
   halfDamageTaken: 0
+  reloadUpgradePurchases: 1
+  reloadUpgradeMultiplier: 6
+  reloadUpgradeCostBoost: 0
+  reloadUpgradeCost: 10
+  damageUpgradePurchases: 1
+  damageUpgradeMultiplier: 25
+  damageUpgradeCostBoost: 0
+  damageUpgradeCost: 10
+  movementSpeedUpgradePurchases: 1
+  movementSpeedUpgradeMultiplier: 5
+  movementSpeedUpgradeCostBoost: 0
+  movementSpeedUpgradeCost: 10
+  healthUpgradePurchases: 1
+  healthUpgradeMultiplier: 5
+  healthUpgradeCostBoost: 0
+  healthUpgradeCost: 10
+  hdtUpgradePurchases: 1
+  hdtUpgradeMultiplier: 0
+  hdtUpgradeCostBoost: 0
+  hdtUpgradeCost: 10
 --- !u!4 &286373139
 Transform:
   m_ObjectHideFlags: 0
@@ -3062,7 +3080,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 702031865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880926792}
+        m_TargetAssemblyTypeName: CurrencySystem, Assembly-CSharp
+        m_MethodName: MovementSpeedUpgradeHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &702031865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3563,8 +3593,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.1657, y: 53.567}
-  m_SizeDelta: {x: 466.6736, y: 82.5146}
+  m_AnchoredPosition: {x: 2.1657, y: 36.672}
+  m_SizeDelta: {x: 466.6736, y: 116.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &792495550
 MonoBehaviour:
@@ -3587,9 +3617,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: 18473fbabbcacc941aa3fae77afe267b, type: 3}
+    m_FontSize: 19
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 165
@@ -3934,6 +3964,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba1309c956be5342a87272bab95df84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reloadUpgradeCostText: {fileID: 1013570516}
+  reloadUpgradeMultiplierText: {fileID: 1527138806}
+  damageUpgradeCostText: {fileID: 935015760}
+  damageUpgradeMultiplierText: {fileID: 199202747}
+  movementSpeedUpgradeCostText: {fileID: 362072879}
+  movementSpeedUpgradeMultiplierText: {fileID: 1652683899}
+  healthUpgradeCostText: {fileID: 1771205227}
+  healthUpgradeMultiplierText: {fileID: 1614519422}
+  hdtUpgradeCostText: {fileID: 1459346029}
+  hdtUpgradeMultiplierText: {fileID: 1925149686}
   tapperUpgradePurchases: 1
   tapperUpgradeMultiplier: 1
   tapperUpgradeCostBoost: 0
@@ -3964,7 +4004,7 @@ MonoBehaviour:
   tappingUniverseUpgradeCostText: {fileID: 212325969}
   tappingUniverseUpgradeMultiplierText: {fileID: 1584689957}
   tappingUniverseUpgradeCost: 10
-  coinCounter: 0
+  coinCounter: 1
   multiplier: 1
   coinCount: {fileID: 880926790}
   coinsPerClick: {fileID: 1679001913}
@@ -4903,7 +4943,7 @@ GameObject:
   - component: {fileID: 1013570517}
   - component: {fileID: 1013570516}
   m_Layer: 5
-  m_Name: Cost (2)
+  m_Name: CoinCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5288,8 +5328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.1657, y: 121.97}
-  m_SizeDelta: {x: 384.94, y: 54.2909}
+  m_AnchoredPosition: {x: 3.5725, y: 121.97}
+  m_SizeDelta: {x: 463.86, y: 54.2909}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1102766669
 MonoBehaviour:
@@ -5312,9 +5352,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 18473fbabbcacc941aa3fae77afe267b, type: 3}
     m_FontSize: 42
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 165
@@ -10983,7 +11023,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1274016038}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880926792}
+        m_TargetAssemblyTypeName: CurrencySystem, Assembly-CSharp
+        m_MethodName: ReloadSpeedUpgradeHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1274016038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11114,7 +11166,7 @@ GameObject:
   - component: {fileID: 1304430504}
   - component: {fileID: 1304430503}
   m_Layer: 5
-  m_Name: IncraseHP
+  m_Name: IncreaseHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11185,7 +11237,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1304430504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880926792}
+        m_TargetAssemblyTypeName: CurrencySystem, Assembly-CSharp
+        m_MethodName: HealthUpgradeHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1304430504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11335,7 +11399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -141.453, y: -59}
+  m_AnchoredPosition: {x: -141.453, y: -79}
   m_SizeDelta: {x: 213.0629, y: 75.0389}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1345173389
@@ -11407,15 +11471,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4138483, g: 0.9433962, b: 0.42926836, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 55caca9d8d97968418405c8498cfa310, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11602,7 +11666,7 @@ GameObject:
   - component: {fileID: 1527138807}
   - component: {fileID: 1527138806}
   m_Layer: 5
-  m_Name: Cost (1)
+  m_Name: Multiplier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11705,7 +11769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 128.97, y: -59}
+  m_AnchoredPosition: {x: 128.97, y: -79}
   m_SizeDelta: {x: 213.0629, y: 75.0389}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1546624493
@@ -11777,15 +11841,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.3254717, b: 0.3254717, a: 1}
+  m_Color: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7ae476af355829d40990d983e8a0f26e, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12273,7 +12337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1639105721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880926792}
+        m_TargetAssemblyTypeName: CurrencySystem, Assembly-CSharp
+        m_MethodName: HdtUpgradeHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1639105721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13009,15 +13085,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6156863, g: 0.7372549, b: 0.80392164, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0dc87e943bea2f94aa78bc549152640a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13586,7 +13662,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2070642766}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880926792}
+        m_TargetAssemblyTypeName: CurrencySystem, Assembly-CSharp
+        m_MethodName: DamageUpgradeHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2070642766
 MonoBehaviour:
   m_ObjectHideFlags: 0

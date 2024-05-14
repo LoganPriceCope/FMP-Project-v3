@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class MovementCamera : MonoBehaviour
 {
     public Camera playerCamera;
-    public float walkSpeed = 6f;
+    public float walkSpeed;
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
@@ -26,6 +27,7 @@ public class MovementCamera : MonoBehaviour
     CharacterController characterController;
     void Start()
     {
+        walkSpeed = GameManagerScript.instance.movementSpeedUpgradeMultiplier;
         characterController = GetComponent<CharacterController>();
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
@@ -48,6 +50,9 @@ public class MovementCamera : MonoBehaviour
         #endregion
 
         #region Handles Jumping
+
+        
+
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
@@ -76,5 +81,10 @@ public class MovementCamera : MonoBehaviour
         }
  
         #endregion
+    }
+
+    public void ForceJump()
+    {
+        moveDirection.y = jumpPower;
     }
 }

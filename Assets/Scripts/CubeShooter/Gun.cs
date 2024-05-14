@@ -54,7 +54,7 @@ public class Gun : MonoBehaviour
         reloadText.text = "RELOADING";
         gunData.reloading = true;
 
-        yield return new WaitForSeconds(gunData.reloadTime);
+        yield return new WaitForSeconds(GameManagerScript.instance.reloadUpgradeMultiplier);
 
         gunData.currentAmmo = gunData.magSize;
         gunData.reloading = false;

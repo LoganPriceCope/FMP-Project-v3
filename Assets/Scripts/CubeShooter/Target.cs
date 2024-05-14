@@ -10,8 +10,11 @@ public class Target : MonoBehaviour, IDamagable
     private PlayerSystem CurrentEnemies;
     private GameObject Player;
 
+    public GameObject coinPrefab;
+
     public Canvas canvas;
     public TextMeshProUGUI healthText;
+    
 
     public void Start()
     {
@@ -25,10 +28,15 @@ public class Target : MonoBehaviour, IDamagable
 
     public void Damage(float damage)
     {
-
-        health -= damage;
+        var spawnedCoin = Instantiate(coinPrefab, transform.position, transform.rotation);
+        //   health -= damage;
+        health -= GameManagerScript.instance.damageUpgradeMultiplier;
         if (health <= 0)
         {
+            for(int i = 0; i < 8; i++)
+            {
+                Instantiate(coinPrefab, transform.position, transform.rotation);
+            }
             Destroy(gameObject);
             Player.GetComponent<PlayerSystem>().currentEnemies--;
         }

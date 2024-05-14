@@ -19,13 +19,25 @@ public class JumpPadScript : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter(Collider collision)
+    /*public void OnTriggerEnter(Collider collision)
     {
         Player.GetComponent<MovementCamera>().jumpPower = 15;
+        Player.GetComponent<MovementCamera>().ForceJump();
+    }*/
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Player.GetComponent<MovementCamera>().jumpPower = 15;
+            Player.GetComponent<MovementCamera>().ForceJump();
+        }
     }
     public void OnTriggerExit(Collider collision)
     {
-        Player.GetComponent<MovementCamera>().jumpPower = 8;
+        if (collision.CompareTag("Player"))
+        {
+            Player.GetComponent<MovementCamera>().jumpPower = 8;
+        }
     }
 
     /* public void OnTriggerEnter(Collider collision)

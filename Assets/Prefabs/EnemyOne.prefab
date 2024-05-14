@@ -919,6 +919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  coinPrefab: {fileID: 5096520127019430293, guid: 8a87c23bb823fd0418ac2dbd8754ae0a, type: 3}
   canvas: {fileID: 3921300158192165710}
   healthText: {fileID: 2007268463471751559}
 --- !u!114 &1195237122192862124
