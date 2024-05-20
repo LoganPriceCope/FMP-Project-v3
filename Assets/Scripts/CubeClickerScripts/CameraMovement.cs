@@ -8,7 +8,10 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Camera cam;
 
     private Vector3 previousPosition;
-
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(1))

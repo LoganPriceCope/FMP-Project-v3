@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class PlayerSystem : MonoBehaviour
 {
     public Text healthUI;
-    private float totalHP = GameManagerScript.instance.healthUpgradeMultiplier;
+    private float totalHP;
     private float currentHP;
 
-    public float coins = 0;
+    public Text newCoinsText;
     public Text coinText;
+    private float newCoins = 0;
+
+    public GameObject deathFrame;
 
     public GameObject Player;
     public GameObject Enemy;
@@ -23,8 +26,11 @@ public class PlayerSystem : MonoBehaviour
     public int currentEnemies = 1;
     void Awake()
     {
-        currentHP = totalHP;
+        
         SpawnEnemies();
+        Time.timeScale = 1;
+        totalHP = GameManagerScript.instance.healthUpgradeMultiplier;
+        currentHP = totalHP;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,13 +38,16 @@ public class PlayerSystem : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             print("Cointouched");
-            coins++;
+            AudioManager.Instance.PlaySFX("Coin");
+            GameManagerScript.instance.goldCoins++;
+            newCoins++;
             Destroy(other.gameObject);
         }
     }
 
     void Update()
     {
+        newCoinsText.text = "Coins Earnt: " + newCoins;
         if (currentHP <= 0)
         {
             Die();
@@ -53,7 +62,7 @@ public class PlayerSystem : MonoBehaviour
         {
             SpawnEnemiesTwo();
         }
-        coinText.text = "COINS: " + coins;
+        coinText.text = "COINS: " + GameManagerScript.instance.goldCoins;
     }
 
     void Respawn()
@@ -105,7 +114,10 @@ public class PlayerSystem : MonoBehaviour
 
     void Die()
     {
-        print("Dies");
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        deathFrame.active = true;
     }
 
     public void TakeDamage(float damage)

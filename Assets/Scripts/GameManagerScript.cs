@@ -11,6 +11,46 @@ public class GameManagerScript : MonoBehaviour
     public float playerHealth;
     public bool halfDamageTaken;
 
+    public float goldCoins;
+    public float cubeCoins;
+
+    // || INNER PEACE ||
+    public float innerPeaceCost = 100f;
+
+    // || CLICKER UPGRADES ||
+
+    // Tapper Upgrade
+    public float tapperUpgradePurchases = 1f;
+    public float tapperUpgradeMultiplier = 1f;
+    public float tapperUpgradeCostBoost;
+    public float tapperUpgradeCost = 10f;
+
+    // Helping Hand Upgrade
+    public float helpingHandUpgradePurchases = 0f;
+    public float helpingHandUpgradeMultiplier = 0f;
+    public float helpingHandUpgradeCostBoost;
+    public float helpingHandUpgradeCost = 10f;
+
+    // Super Tapper Upgrade
+    public float superTapperUpgradePurchases = 0f;
+    public float superTapperUpgradeMultiplier = 0f;
+    public float superTapperUpgradeCostBoost;
+    public float superTapperUpgradeCost = 10f;
+
+    // Tapping Factory Upgrade
+    public float tappingFactoryUpgradePurchases = 0f;
+    public float tappingFactoryUpgradeMultiplier = 0f;
+    public float tappingFactoryUpgradeCostBoost;
+    public float tappingFactoryUpgradeCost = 10f;
+
+    // Tapping Universe Upgrade
+    public float tappingUniverseUpgradePurchases = 0f;
+    public float tappingUniverseUpgradeMultiplier = 0f;
+    public float tappingUniverseUpgradeCostBoost;
+    public float tappingUniverseUpgradeCost = 10f;
+
+    // || COMBAT UPGRADES ||
+
     // Reload Upgrade
     public float reloadUpgradePurchases = 1f;
     public float reloadUpgradeMultiplier = 6f;
@@ -40,6 +80,9 @@ public class GameManagerScript : MonoBehaviour
     public bool hdtUpgradeMultiplier = false;
     public float hdtUpgradeCostBoost;
     public float hdtUpgradeCost = 10f;
+
+
+    // || GAME MANAGER FUNCTIONALITY ||
 
     public static GameManagerScript instance;
 

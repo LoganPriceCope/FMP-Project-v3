@@ -49,6 +49,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        AudioManager.Instance.PlaySFX("Reload");
         anim.SetBool("reload", true);
 
         reloadText.text = "RELOADING";
@@ -83,6 +84,7 @@ public class Gun : MonoBehaviour
                     //takeDamage.TakeDamage();
                    // player.GetComponent<PlayerSystem>().TakeDamage();
                 }
+                AudioManager.Instance.PlaySFX("GunShoot");
                 gunData.currentAmmo--;
                 timeSinceLastShot = 0;
                 var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);

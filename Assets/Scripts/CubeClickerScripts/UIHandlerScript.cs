@@ -21,11 +21,13 @@ public class UIHandlerScript : MonoBehaviour
         {
             helpMenuButton.transform.gameObject.SetActive(true);
             helpMenuActive = true;
+            AudioManager.Instance.PlaySFX("UIClick");
         }
         else
         {
             helpMenuButton.transform.gameObject.SetActive(false);
             helpMenuActive = false;
+            AudioManager.Instance.PlaySFX("UIClick");
         }
     }
 
@@ -35,11 +37,13 @@ public class UIHandlerScript : MonoBehaviour
         {
             settingsMenuButton.transform.gameObject.SetActive(true);
             settingsMenuActive = true;
+            AudioManager.Instance.PlaySFX("UIClick");
         }
         else
         {
             settingsMenuButton.transform.gameObject.SetActive(false);
             settingsMenuActive = false;
+            AudioManager.Instance.PlaySFX("UIClick");
         }
     }
 
@@ -49,16 +53,32 @@ public class UIHandlerScript : MonoBehaviour
         {
             achievementsMenuButton.transform.gameObject.SetActive(true);
             achievementsMenuActive = true;
+            AudioManager.Instance.PlaySFX("UIClick");
         }
         else
         {
             achievementsMenuButton.transform.gameObject.SetActive(false);
             achievementsMenuActive = false;
+            AudioManager.Instance.PlaySFX("UIClick");
         }
     }
 
     public void loadSceneTest()
     {
         SceneManager.LoadScene("CubeShooter");
+    }
+
+    public void loadCubeClicker()
+    {
+        SceneManager.LoadScene("CubeClicker");
+    }
+    public void loadStartMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void leave()
+    {
+        Application.Quit();
     }
 }

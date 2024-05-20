@@ -8,7 +8,7 @@ public class MovementCamera : MonoBehaviour
 {
     public Camera playerCamera;
     public float walkSpeed;
-    public float runSpeed = 12f;
+    public float runSpeed;
     public float jumpPower = 7f;
     public float gravity = 10f;
  
@@ -28,6 +28,7 @@ public class MovementCamera : MonoBehaviour
     void Start()
     {
         walkSpeed = GameManagerScript.instance.movementSpeedUpgradeMultiplier;
+        runSpeed = GameManagerScript.instance.movementSpeedUpgradeMultiplier + 10f;
         characterController = GetComponent<CharacterController>();
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;

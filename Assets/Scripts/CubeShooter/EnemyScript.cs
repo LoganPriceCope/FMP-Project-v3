@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour
 
 
 
-    public TextMeshProUGUI cooldownText;
+   public Text cooldownText;
 
 
 
@@ -58,7 +58,7 @@ public class EnemyScript : MonoBehaviour
 
     public IEnumerator StartCoolDown()
     {
-        cooldownText.text = "COOLDOWN";
+       cooldownText.text = "COOLDOWN";
         canTrigger = false;
         yield return new WaitForSeconds(damageCooldown);
         canTrigger = true;

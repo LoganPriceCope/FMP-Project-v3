@@ -18,12 +18,19 @@ public class WalkspeedPadScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
-        Player.GetComponent<MovementCamera>().walkSpeed = 25f;
-        Player.GetComponent<MovementCamera>().runSpeed = 32f;
+        if (collision.CompareTag("Player"))
+        {
+            Player.GetComponent<MovementCamera>().walkSpeed = 25f;
+            Player.GetComponent<MovementCamera>().runSpeed = 32f;
+        }
+           
     }
     public void OnTriggerExit(Collider collision)
     {
-        Player.GetComponent<MovementCamera>().walkSpeed = 14f;
-        Player.GetComponent<MovementCamera>().runSpeed = 18f;
+        if (collision.CompareTag("Player"))
+        {
+            Player.GetComponent<MovementCamera>().walkSpeed = GameManagerScript.instance.movementSpeedUpgradeMultiplier;
+            Player.GetComponent<MovementCamera>().runSpeed = GameManagerScript.instance.movementSpeedUpgradeMultiplier + 10f;
+        }
     }
 }

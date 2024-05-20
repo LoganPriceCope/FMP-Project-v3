@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-
+using UnityEngine.UI;
 public class Target : MonoBehaviour, IDamagable
 {
     public float health;
@@ -13,7 +12,7 @@ public class Target : MonoBehaviour, IDamagable
     public GameObject coinPrefab;
 
     public Canvas canvas;
-    public TextMeshProUGUI healthText;
+   public Text healthText;
     
 
     public void Start()
@@ -22,14 +21,14 @@ public class Target : MonoBehaviour, IDamagable
     }
     public void Update()
     {
-      //  health = GetComponent<EnemyScript>().enemyHealth;
-        healthText.text = "" + health;
+    health = GetComponent<Target>().health;
+      healthText.text = "" + health;
     }
 
     public void Damage(float damage)
     {
+        AudioManager.Instance.PlaySFX("Hit");
         var spawnedCoin = Instantiate(coinPrefab, transform.position, transform.rotation);
-        //   health -= damage;
         health -= GameManagerScript.instance.damageUpgradeMultiplier;
         if (health <= 0)
         {
@@ -46,4 +45,5 @@ public class Target : MonoBehaviour, IDamagable
     {
 
     }
+  
 }

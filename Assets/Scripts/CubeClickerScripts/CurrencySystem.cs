@@ -21,51 +21,37 @@ public class CurrencySystem : MonoBehaviour
     public Text hdtUpgradeCostText;
     public Text hdtUpgradeMultiplierText;
 
+    // Inner Peace
+    public Text innerPeaceText;
+    public GameObject innerPeaceFrame;
+
     // Upgrades Tapper
-    public float tapperUpgradePurchases = 1f;
-    public float tapperUpgradeMultiplier = 1f;
-    public float tapperUpgradeCostBoost;
     public Text tapperUpgradeCostText;
     public Text tapperUpgradeMultiplierText;
-    public float tapperUpgradeCost = 10f;
 
     // Upgrades Helping Hand
-    public float helpingHandUpgradePurchases = 0f;
-    public float helpingHandUpgradeMultiplier = 0f;
-    public float helpingHandUpgradeCostBoost;
     public Text helpingHandUpgradeCostText;
     public Text helpingHandUpgradeMultiplierText;
-    public float helpingHandUpgradeCost = 10f;
 
     // Upgrades Super Tapper
-    public float superTapperUpgradePurchases = 0f;
-    public float superTapperUpgradeMultiplier = 0f;
-    public float superTapperUpgradeCostBoost;
     public Text superTapperUpgradeCostText;
     public Text superTapperUpgradeMultiplierText;
-    public float superTapperUpgradeCost = 10f;
 
     // Upgrades Tapping Factory
-    public float tappingFactoryUpgradePurchases = 0f;
-    public float tappingFactoryUpgradeMultiplier = 0f;
-    public float tappingFactoryUpgradeCostBoost;
     public Text tappingFactoryUpgradeCostText;
     public Text tappingFactoryUpgradeMultiplierText;
-    public float tappingFactoryUpgradeCost = 10f;
 
     // Upgrades Tapping Universe
-    public float tappingUniverseUpgradePurchases = 0f;
-    public float tappingUniverseUpgradeMultiplier = 0f;
-    public float tappingUniverseUpgradeCostBoost;
     public Text tappingUniverseUpgradeCostText;
     public Text tappingUniverseUpgradeMultiplierText;
-    public float tappingUniverseUpgradeCost = 10f;
 
     public float coinCounter = 0f;
     public float multiplier;
 
     public Text coinCount;
     public Text coinsPerClick;
+    public Text goldCoins;
+    public bool innerPeaceUnlocked;
 
     GameManagerScript gm;
 
@@ -77,9 +63,9 @@ public class CurrencySystem : MonoBehaviour
 
     private void Update()
     {
-
-        coinCount.text = coinCounter+"";
-        multiplier = 1 + (helpingHandUpgradeMultiplier + superTapperUpgradeMultiplier + tappingFactoryUpgradeMultiplier + tappingUniverseUpgradeMultiplier) * tapperUpgradeMultiplier;
+        goldCoins.text = "Coins: " + gm.goldCoins;
+        coinCount.text = gm.cubeCoins+"";
+        multiplier = 1 + (gm.helpingHandUpgradeMultiplier + gm.superTapperUpgradeMultiplier + gm.tappingFactoryUpgradeMultiplier + gm.tappingUniverseUpgradeMultiplier) * gm.tapperUpgradeMultiplier;
         coinsPerClick.text = multiplier + "c/click";
 
         // Reload upgrade costs
@@ -188,136 +174,159 @@ public class CurrencySystem : MonoBehaviour
         }
 
         // Tapper upgrade costs
-        tapperUpgradeCostBoost = tapperUpgradePurchases * 10;
-        if (tapperUpgradePurchases > 1)
+        gm.tapperUpgradeCostBoost = gm.tapperUpgradePurchases * 10;
+        if (gm.tapperUpgradePurchases > 1)
         {
-            tapperUpgradeCost = 50f * tapperUpgradePurchases * tapperUpgradePurchases * tapperUpgradePurchases * tapperUpgradePurchases;
+            gm.tapperUpgradeCost = 50f * gm.tapperUpgradePurchases * gm.tapperUpgradePurchases * gm.tapperUpgradePurchases * gm.tapperUpgradePurchases;
         }
         else
         {
-            tapperUpgradeCost = 50f * tapperUpgradePurchases;
+            gm.tapperUpgradeCost = 50f * gm.tapperUpgradePurchases;
         }
-        tapperUpgradeCostText.text = "Tapper [" + tapperUpgradeCost + "c]";
-        tapperUpgradeMultiplierText.text = "x"+tapperUpgradeMultiplier;
+        tapperUpgradeCostText.text = "Tapper [" + gm.tapperUpgradeCost + "c]";
+        tapperUpgradeMultiplierText.text = "x"+gm.tapperUpgradeMultiplier;
 
         // Helping hand upgrade costs
-        helpingHandUpgradeCostBoost = helpingHandUpgradePurchases * 10 + 10;
-        if (helpingHandUpgradePurchases >= 1)
+        gm.helpingHandUpgradeCostBoost = gm.helpingHandUpgradePurchases * 10 + 10;
+        if (gm.helpingHandUpgradePurchases >= 1)
         {
-            helpingHandUpgradeCost = 10f * helpingHandUpgradePurchases * 1.2f;
+            gm.helpingHandUpgradeCost = 10f * gm.helpingHandUpgradePurchases * 1.2f;
         }
         else
         {
-            helpingHandUpgradeCost = 10f;
+            gm.helpingHandUpgradeCost = 10f;
         }
-        helpingHandUpgradeCostText.text = "Helping Hand [" + helpingHandUpgradeCost + "c]";
-        helpingHandUpgradeMultiplierText.text = "+" + helpingHandUpgradeMultiplier;
+        helpingHandUpgradeCostText.text = "Helping Hand [" + gm.helpingHandUpgradeCost + "c]";
+        helpingHandUpgradeMultiplierText.text = "+" + gm.helpingHandUpgradeMultiplier;
 
         // Super tapper upgrade costs
-        superTapperUpgradeCostBoost = superTapperUpgradePurchases * 10 + 10;
-        if (superTapperUpgradePurchases >= 1)
+        gm.superTapperUpgradeCostBoost = gm.superTapperUpgradePurchases * 10 + 10;
+        if (gm.superTapperUpgradePurchases >= 1)
         {
-            superTapperUpgradeCost = 500f * superTapperUpgradePurchases * 1.4f;
+            gm.superTapperUpgradeCost = 500f * gm.superTapperUpgradePurchases * 1.4f;
         }
         else
         {
-            superTapperUpgradeCost = 500f;
+            gm.superTapperUpgradeCost = 500f;
         }
-        superTapperUpgradeCostText.text = "Super Tapper [" + superTapperUpgradeCost + "c]";
-        superTapperUpgradeMultiplierText.text = "+" + superTapperUpgradeMultiplier;
+        superTapperUpgradeCostText.text = "Super Tapper [" + gm.superTapperUpgradeCost + "c]";
+        superTapperUpgradeMultiplierText.text = "+" + gm.superTapperUpgradeMultiplier;
 
         // Tapping factory upgrade costs
-        tappingFactoryUpgradeCostBoost = tappingFactoryUpgradePurchases * 10 + 10;
-        if (tappingFactoryUpgradePurchases >= 1)
+        gm.tappingFactoryUpgradeCostBoost = gm.tappingFactoryUpgradePurchases * 10 + 10;
+        if (gm.tappingFactoryUpgradePurchases >= 1)
         {
-            tappingFactoryUpgradeCost = 10000f * tappingFactoryUpgradePurchases * 1.5f;
+            gm.tappingFactoryUpgradeCost = 10000f * gm.tappingFactoryUpgradePurchases * 1.5f;
         }
         else
         {
-            tappingFactoryUpgradeCost = 10000f;
+            gm.tappingFactoryUpgradeCost = 10000f;
         }
-        tappingFactoryUpgradeCostText.text = "Tapping Factory [" + tappingFactoryUpgradeCost + "c]";
-        tappingFactoryUpgradeMultiplierText.text = "+" + tappingFactoryUpgradeMultiplier;
+        tappingFactoryUpgradeCostText.text = "Tapping Factory [" + gm.tappingFactoryUpgradeCost + "c]";
+        tappingFactoryUpgradeMultiplierText.text = "+" + gm.tappingFactoryUpgradeMultiplier;
 
         // Tapping Universe upgrade costs
-        tappingUniverseUpgradeCostBoost = tappingUniverseUpgradePurchases * 10 + 10;
-        if (tappingUniverseUpgradePurchases >= 1)
+        gm.tappingUniverseUpgradeCostBoost = gm.tappingUniverseUpgradePurchases * 10 + 10;
+        if (gm.tappingUniverseUpgradePurchases >= 1)
         {
-            tappingUniverseUpgradeCost = 1000000f * tappingUniverseUpgradePurchases * 1.6f;
+            gm.tappingUniverseUpgradeCost = 1000000f * gm.tappingUniverseUpgradePurchases * 1.6f;
         }
         else
         {
-            tappingUniverseUpgradeCost = 1000000f;
+            gm.tappingUniverseUpgradeCost = 1000000f;
         }
-        tappingUniverseUpgradeCostText.text = "Tapping Universe [" + tappingUniverseUpgradeCost + "c]";
-        tappingUniverseUpgradeMultiplierText.text = "+" + tappingUniverseUpgradeMultiplier;
+        tappingUniverseUpgradeCostText.text = "Tapping Universe [" + gm.tappingUniverseUpgradeCost + "c]";
+        tappingUniverseUpgradeMultiplierText.text = "+" + gm.tappingUniverseUpgradeMultiplier;
     }
 
+    // || INNER PEACE ||
+
+    public void innerPeace()
+    {
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.goldCoins >= gm.innerPeaceCost && innerPeaceUnlocked == false)
+        {
+
+            gm.goldCoins = gm.goldCoins - gm.innerPeaceCost;
+            innerPeaceUnlocked = true;
+            innerPeaceText.text = "Inner Peace";
+        }
+        else if (innerPeaceUnlocked == true)
+        {
+            innerPeaceFrame.active = true;
+        }
+    }
 
     // || CUBE CLICKER UPGADES ||
     public void tapperUpgradeHandler()
     {
-        if (coinCounter >= tapperUpgradeCost)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.tapperUpgradeCost)
         {
-            
-            coinCounter = coinCounter - tapperUpgradeCost;
-            tapperUpgradePurchases = tapperUpgradePurchases + 1;
-            tapperUpgradeMultiplier = tapperUpgradeMultiplier + 1;
+
+            gm.cubeCoins = gm.cubeCoins - gm.tapperUpgradeCost;
+            gm.tapperUpgradePurchases = gm.tapperUpgradePurchases + 1;
+            gm.tapperUpgradeMultiplier = gm.tapperUpgradeMultiplier + 1;
             
         }
     }
 
     public void helpingHandUpgradeHandler()
     {
-        if (coinCounter >= helpingHandUpgradeCost)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.helpingHandUpgradeCost)
         {
-            coinCounter = coinCounter - helpingHandUpgradeCost;
-            helpingHandUpgradePurchases = helpingHandUpgradePurchases + 1;
-            helpingHandUpgradeMultiplier = helpingHandUpgradeMultiplier + 1;
+            gm.cubeCoins = gm.cubeCoins - gm.helpingHandUpgradeCost;
+            gm.helpingHandUpgradePurchases = gm.helpingHandUpgradePurchases + 1;
+            gm.helpingHandUpgradeMultiplier = gm.helpingHandUpgradeMultiplier + 1;
         }
     }
 
     public void superTapperUpgradeHandler()
     {
-        if (coinCounter >= superTapperUpgradeCost)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.superTapperUpgradeCost)
         {
-            coinCounter = coinCounter - superTapperUpgradeCost;
-            superTapperUpgradePurchases = superTapperUpgradePurchases + 1;
-            superTapperUpgradeMultiplier = superTapperUpgradeMultiplier + 10;
+            gm.cubeCoins = gm.cubeCoins - gm.superTapperUpgradeCost;
+            gm.superTapperUpgradePurchases = gm.superTapperUpgradePurchases + 1;
+            gm.superTapperUpgradeMultiplier = gm.superTapperUpgradeMultiplier + 10;
         }
     }
 
     public void tappingFactoryUpgradeHandler()
     {
-        if (coinCounter >= tappingFactoryUpgradeCost)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.tappingFactoryUpgradeCost)
         {
-            coinCounter = coinCounter - tappingFactoryUpgradeCost;
-            tappingFactoryUpgradePurchases = tappingFactoryUpgradePurchases + 1;
-            tappingFactoryUpgradeMultiplier = tappingFactoryUpgradeMultiplier + 100;
+            gm.cubeCoins = gm.cubeCoins - gm.tappingFactoryUpgradeCost;
+            gm.tappingFactoryUpgradePurchases = gm.tappingFactoryUpgradePurchases + 1;
+            gm.tappingFactoryUpgradeMultiplier = gm.tappingFactoryUpgradeMultiplier + 100;
         }
     }
 
     public void tappingUniverseUpgradeHandler()
     {
-        if (coinCounter >= tappingUniverseUpgradeCost)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.tappingUniverseUpgradeCost)
         {
-            coinCounter = coinCounter - tappingUniverseUpgradeCost;
-            tappingUniverseUpgradePurchases = tappingUniverseUpgradePurchases + 1;
-            tappingUniverseUpgradeMultiplier = tappingUniverseUpgradeMultiplier + 1000;
+            gm.cubeCoins = gm.cubeCoins - gm.tappingUniverseUpgradeCost;
+            gm.tappingUniverseUpgradePurchases = gm.tappingUniverseUpgradePurchases + 1;
+            gm.tappingUniverseUpgradeMultiplier = gm.tappingUniverseUpgradeMultiplier + 1000;
         }
     }
 
     public void AddCube()
     {
-        coinCounter = coinCounter + multiplier;
+        gm.cubeCoins = gm.cubeCoins + multiplier;
     }
 
     // || FIRST PERSON SHOOTER UPGRADES ||
     public void ReloadSpeedUpgradeHandler()
     {
-        if (coinCounter >= gm.reloadUpgradeCost && gm.reloadUpgradeMultiplier > 4)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.reloadUpgradeCost && gm.reloadUpgradeMultiplier > 4)
         {
-            coinCounter = coinCounter - gm.reloadUpgradeCost;
+            gm.cubeCoins = gm.cubeCoins - gm.reloadUpgradeCost;
             gm.reloadUpgradePurchases = gm.reloadUpgradePurchases + 1;
             gm.reloadUpgradeMultiplier = gm.reloadUpgradeMultiplier - 0.5f;
         }
@@ -325,9 +334,10 @@ public class CurrencySystem : MonoBehaviour
 
     public void DamageUpgradeHandler()
     {
-        if (coinCounter >= gm.damageUpgradeCost && gm.damageUpgradeMultiplier < 100)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.damageUpgradeCost && gm.damageUpgradeMultiplier < 100)
         {
-            coinCounter = coinCounter - gm.damageUpgradeCost;
+            gm.cubeCoins = gm.cubeCoins - gm.damageUpgradeCost;
             gm.damageUpgradePurchases = gm.damageUpgradePurchases + 1;
             gm.damageUpgradeMultiplier = gm.damageUpgradeMultiplier + 25f;
         }
@@ -335,18 +345,20 @@ public class CurrencySystem : MonoBehaviour
 
     public void MovementSpeedUpgradeHandler()
     {
-        if (coinCounter >= gm.movementSpeedUpgradeCost && gm.movementSpeedUpgradeMultiplier < 25)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.movementSpeedUpgradeCost && gm.movementSpeedUpgradeMultiplier < 25)
         {
-            coinCounter = coinCounter - gm.movementSpeedUpgradeCost;
+            gm.cubeCoins = gm.cubeCoins - gm.movementSpeedUpgradeCost;
             gm.movementSpeedUpgradePurchases = gm.movementSpeedUpgradePurchases + 1;
             gm.movementSpeedUpgradeMultiplier = gm.movementSpeedUpgradeMultiplier + 5f;
         }
     }
     public void HealthUpgradeHandler()
     {
-        if (coinCounter >= gm.healthUpgradeCost && gm.healthUpgradeMultiplier < 25)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.healthUpgradeCost && gm.healthUpgradeMultiplier < 25)
         {
-            coinCounter = coinCounter - gm.healthUpgradeCost;
+            gm.cubeCoins = gm.cubeCoins - gm.healthUpgradeCost;
             gm.healthUpgradePurchases = gm.healthUpgradePurchases + 1;
             gm.healthUpgradeMultiplier = gm.healthUpgradeMultiplier + 5f;
         }
@@ -354,9 +366,10 @@ public class CurrencySystem : MonoBehaviour
 
     public void HdtUpgradeHandler()
     {
-        if (coinCounter >= gm.hdtUpgradeCost && gm.hdtUpgradeMultiplier == false)
+        AudioManager.Instance.PlaySFX("UIClick");
+        if (gm.cubeCoins >= gm.hdtUpgradeCost && gm.hdtUpgradeMultiplier == false)
         {
-            coinCounter = coinCounter - gm.hdtUpgradeCost;
+            gm.cubeCoins = gm.cubeCoins - gm.hdtUpgradeCost;
             gm.hdtUpgradePurchases = gm.hdtUpgradePurchases + 1;
             gm.hdtUpgradeMultiplier = true;
         }
