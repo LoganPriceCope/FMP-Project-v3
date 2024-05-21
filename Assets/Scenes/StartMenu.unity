@@ -535,7 +535,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 148856702}
         m_TargetAssemblyTypeName: UIHandlerScript, Assembly-CSharp
-        m_MethodName: loadCubeClicker
+        m_MethodName: leave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

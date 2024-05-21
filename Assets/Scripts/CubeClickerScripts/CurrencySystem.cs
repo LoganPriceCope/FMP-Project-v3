@@ -78,10 +78,10 @@ public class CurrencySystem : MonoBehaviour
         {
             gm.reloadUpgradeCost = 10f * gm.reloadUpgradePurchases;
         }
-        if (gm.reloadUpgradePurchases < 5)
+        if (gm.reloadUpgradePurchases < 6)
         {
             reloadUpgradeCostText.text = "[" + gm.reloadUpgradeCost + "c]";
-            reloadUpgradeMultiplierText.text = gm.reloadUpgradeMultiplier + "/S >" + (gm.reloadUpgradeMultiplier - 0.5f) + "/S";
+            reloadUpgradeMultiplierText.text = gm.reloadUpgradeMultiplier + "/S >" + (gm.reloadUpgradeMultiplier - 1f) + "/S";
         }
         else
         {
@@ -324,11 +324,11 @@ public class CurrencySystem : MonoBehaviour
     public void ReloadSpeedUpgradeHandler()
     {
         AudioManager.Instance.PlaySFX("UIClick");
-        if (gm.cubeCoins >= gm.reloadUpgradeCost && gm.reloadUpgradeMultiplier > 4)
+        if (gm.cubeCoins >= gm.reloadUpgradeCost && gm.reloadUpgradeMultiplier > 1)
         {
             gm.cubeCoins = gm.cubeCoins - gm.reloadUpgradeCost;
             gm.reloadUpgradePurchases = gm.reloadUpgradePurchases + 1;
-            gm.reloadUpgradeMultiplier = gm.reloadUpgradeMultiplier - 0.5f;
+            gm.reloadUpgradeMultiplier = gm.reloadUpgradeMultiplier - 1f;
         }
     }
 
